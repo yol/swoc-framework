@@ -26,6 +26,9 @@ The application uses [Boost](http://www.boost.org/) and [OpenCV 2](http://opencv
 		libopencv-contrib-dev
 		libhighgui-dev
 		libboost-dev
+		libboost-filesystem-dev
+		
+  i.e. run $ sudo apt-get install libcv-dev libopencv-contrib-dev libhighgui-dev libboost-dev libboost-filesystem-dev
 
 - Go to the `cpp` subdirectory and run
 
