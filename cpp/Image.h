@@ -3,6 +3,8 @@
 
 #include <boost/filesystem.hpp>
 #include <opencv2/opencv.hpp>
+#include <opencv2/objdetect/objdetect.hpp>
+#include <opencv2/imgproc/imgproc.hpp>
 
 #include "config.h"
 
@@ -29,6 +31,8 @@ private:
     bool m_silent;
 
     void addHistogram(cv::Mat &into, const cv::Mat &patch) const;
+    
+    void addHoG(cv::Mat &into, const cv::Mat &patch) const;
 
     /**
      * Classify the given patch according to the given vocabulary

@@ -26,9 +26,28 @@ void Image::loadPatches(Mat &into) const
         for (int x = 0; x < image.size().width - PATCH_SIZE; x += PATCH_STRIDE)
         {
             Mat patch(image, Rect(x, y, PATCH_SIZE, PATCH_SIZE));
-            addHistogram(into, patch);
+            //addHistogram(into, patch);
+            addHoG(into, patch);
         }
     }
+}
+
+void Image::addHoG(cv::Mat &into, const cv::Mat &patch) const
+{
+    //Size win_size=Size(64, 128),
+     // Size block_size=Size(16, 16),
+     // Size block_stride=Size(8, 8),
+     // Size cell_size=Size(8, 8),
+     // int nbins=9,
+     // double win_sigma=DEFAULT_WIN_SIGMA,
+     // double threshold_L2hys=0.2,
+     // bool gamma_correction=true,
+     // int nlevels=DEFAULT_NLEVELS
+    cout << "Adding Hog" << std::endl;
+    cv::HOGDescriptor d;
+    vector<float> descriptorsValues;
+    vector<Point> locations;
+    d.compute( patch, descriptorsValues, Size(0,0), Size(0,0), locations);
 }
 
 void Image::addHistogram(cv::Mat &into, const cv::Mat &patch) const

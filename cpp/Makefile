@@ -23,7 +23,7 @@ ifeq (${WIN},yes)
 #LDFLAGS  = -L../lib/pthread/lib ${XLDFLAGS}
 else
 # Otherwise, lib should be installed into /usr/lib
-LIBS     = -lopencv_core -lopencv_highgui -lopencv_ml -lboost_filesystem-mt -lboost_system-mt
+LIBS     = -lopencv_core -lopencv_highgui -lopencv_ml -lboost_filesystem-mt -lboost_system-mt -lopencv_objdetect
 CXXFLAGS = -O2 -Wall
 LDFLAGS  = ${XLDFLAGS}
 endif
