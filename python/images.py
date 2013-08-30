@@ -4,12 +4,12 @@ import os
 import matplotlib.pyplot as plt
 from skimage.feature import hog
 from skimage import data, color, exposure
-import cv2
 import numpy as np
 
 CLASSES = ["rabbit", "airplane", "bicycle"]
 
 def opencv():
+    import cv2
     im = cv2.imread("../images_all/rabbit/13333.png")
 
     plt.imshow(im)

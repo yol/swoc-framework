@@ -22,3 +22,7 @@ cpp/ipch/
 
 boost/
 opencv/
+/images_all
+/*.user
+/*.ncrunchsolution
+/*.user
