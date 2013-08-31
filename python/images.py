@@ -3,8 +3,8 @@
 import os
 import matplotlib.pyplot as plt
 from skimage.feature import hog
-from skimage import data, color, exposure
-import numpy as np
+from skimage import data
+from skimage.viewer import CollectionViewer
 
 CLASSES = ["rabbit", "airplane", "bicycle"]
 
@@ -24,10 +24,17 @@ def generate_classes(classes):
             for fil in files:
                 yield (fil, cls)
 
+def generate_patch_rois(imsize, stride=50, patch_size=32):
+    xsize, ysize = imsize
 
-def generate_patches(image, num_patches, patch_size):
-    #Resize to (256,256)
-    pass
+    for x in range(0, xsize-patch_size+1, stride):
+        for y in range(0, ysize-patch_size+1, stride):
+            yield ((x,x+patch_size), (y,y+patch_size))
+
+def generate_patches(image):
+    for roi in generate_patch_rois(image.shape, image.shape[0]/28):
+        print roi
+        yield image[roi[0][0]:roi[0][1], roi[1][0]:roi[1][1]]
 
 
 def skimage(image, vis=False):
@@ -60,4 +67,15 @@ if __name__ == "__main__":
     image = data.load("/home/loy/Development/swoc-framework/images_all/rabbit/13333.png")
     #print skimage(image, False)
 
+    plt.imshow(image)
+    plt.show()
+
     print len(list(generate_classes(CLASSES)))
+
+    #import ipdb; ipdb.set_trace()
+    p = generate_patches(image)
+    patches = list(p)
+    print len(patches)
+
+    plt.imshow(patches[0])
+    plt.show()
