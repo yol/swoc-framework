@@ -3,7 +3,7 @@
 import os
 import matplotlib.pyplot as plt
 from skimage.feature import hog
-from skimage import data
+from skimage import data, exposure
 from skimage.viewer import CollectionViewer
 
 CLASSES = ["rabbit", "airplane", "bicycle"]
@@ -53,9 +53,14 @@ def skimage(image, vis=False):
         # Rescale histogram for better display
         hog_image_rescaled = exposure.rescale_intensity(hog_image, in_range=(0, 0.02))
 
+        # plt.subplot(122).set_axis_off()
+        # plt.imshow(hog_image_rescaled, cmap=plt.cm.gray)
+        # plt.title('Histogram of Oriented Gradients')
+
+
         plt.subplot(122).set_axis_off()
-        plt.imshow(hog_image_rescaled, cmap=plt.cm.gray)
-        plt.title('Histogram of Oriented Gradients')
+        plt.plot(fd)
+        plt.title('HoG')
         plt.show()
     else:
         fd = hog(image, orientations=8, pixels_per_cell=(16, 16),
@@ -67,15 +72,9 @@ if __name__ == "__main__":
     image = data.load("/home/loy/Development/swoc-framework/images_all/rabbit/13333.png")
     #print skimage(image, False)
 
-    plt.imshow(image)
-    plt.show()
-
     print len(list(generate_classes(CLASSES)))
 
     #import ipdb; ipdb.set_trace()
     p = generate_patches(image)
     patches = list(p)
     print len(patches)
-
-    plt.imshow(patches[0])
-    plt.show()
